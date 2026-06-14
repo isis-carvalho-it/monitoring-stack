@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s # De quanto em quanto tempo ele busca os dados
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['node-exporter:9100'] # Aponta para o container do Node Exporter
