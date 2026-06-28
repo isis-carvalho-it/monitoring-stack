@@ -1,0 +1,24 @@
+name: Deploy Prometheus e Grafana
+
+# 1. Quando vai rodar
+on:
+  push:
+    branches:
+      - main
+
+# 2. O que deve ser feito
+jobs:
+  deploy-na-vm:
+    # Diz para o GitHub usar o robô local e não os servidores deles
+    runs-on: self-hosted 
+
+    steps:
+      # Passo A: O robô baixa o código atualizado do repositório para a VM
+      - name: Baixar o código mais recente
+        uses: actions/checkout@v4
+
+      # Passo B: O robô roda os comandos do Docker na VM
+      - name: Atualizar e subir os contêineres
+        run: |
+          docker compose down
+          docker compose up -d
